@@ -34,7 +34,7 @@
         <div class="quick-start mt-6 sm:mt-8 md:mt-10 lg:mt-12">
           <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
             <div
-              class="relative z-10 bg-[#dbe6fb] dark:bg-[#263145] dark:text-white pt-5 px-4 pb-12 sm:pb-14 md:pb-16 lg:pb-18 rounded-xl text-sm sm:text-base md:text-lg lg:text-xl"
+              class="relative z-10 bg-[#dbe6fb] hover:bg-[#dbdefb] dark:bg-[#263145] dark:hover:bg-[#304357] dark:text-white pt-5 px-4 pb-12 sm:pb-14 md:pb-16 lg:pb-18 rounded-xl text-sm sm:text-base md:text-lg lg:text-xl"
             >
               <p class="z-10 mb-10 sm:mb-12">
                 Design a home office setup for remote work under 500$
@@ -46,7 +46,7 @@
               />
             </div>
             <div
-              class="relative z-10 bg-[#dbe6fb] dark:bg-[#263145] dark:text-white pt-5 px-4 pb-12 sm:pb-14 md:pb-16 lg:pb-18 rounded-xl text-sm sm:text-base md:text-lg lg:text-xl"
+              class="relative z-10 bg-[#dbe6fb] hover:bg-[#dbdefb] dark:bg-[#263145] dark:hover:bg-[#304357] dark:text-white pt-5 px-4 pb-12 sm:pb-14 md:pb-16 lg:pb-18 rounded-xl text-sm sm:text-base md:text-lg lg:text-xl"
             >
               <p class="z-10 mb-10 sm:mb-12">
                 How can I level up my web development expertise in 2025?
@@ -58,7 +58,7 @@
               />
             </div>
             <div
-              class="relative z-10 bg-[#dbe6fb] dark:bg-[#263145] dark:text-white pt-5 px-4 pb-12 sm:pb-14 md:pb-16 lg:pb-18 rounded-xl text-sm sm:text-base md:text-lg lg:text-xl"
+              class="relative z-10 bg-[#dbe6fb] hover:bg-[#dbdefb] dark:bg-[#263145] dark:hover:bg-[#304357] dark:text-white pt-5 px-4 pb-12 sm:pb-14 md:pb-16 lg:pb-18 rounded-xl text-sm sm:text-base md:text-lg lg:text-xl"
             >
               <p class="z-10 mb-10 sm:mb-12">
                 Suggest some useful tools for debugging JavaScript code.
@@ -70,7 +70,7 @@
               />
             </div>
             <div
-              class="relative z-10 bg-[#dbe6fb] dark:bg-[#263145] dark:text-white pt-5 px-4 pb-12 sm:pb-14 md:pb-16 lg:pb-18 rounded-xl text-sm sm:text-base md:text-lg lg:text-xl"
+              class="relative z-10 bg-[#dbe6fb] hover:bg-[#dbdefb] dark:bg-[#263145] dark:hover:bg-[#304357] dark:text-white pt-5 px-4 pb-12 sm:pb-14 md:pb-16 lg:pb-18 rounded-xl text-sm sm:text-base md:text-lg lg:text-xl"
             >
               <p class="z-10 mb-10 sm:mb-12">
                 Create a React JS component fr the simple todo list app.
@@ -93,15 +93,15 @@
         <!-- Form -->
         <form
           action="#"
-          class="flex flex-1 justify-between px-4 sm:px-5 py-3 sm:py-4 rounded-full bg-[#dbe6fb] dark:bg-[#263145] dark:text-white"
+          class="flex flex-1 justify-between pl-4 pr-2 sm:pl-4 py-0 sm:py-2 rounded-full bg-[#dbe6fb] dark:bg-[#263145] dark:text-white"
         >
           <input
             type="text"
             placeholder="Ask Gemini"
-            id="promt-input"
-            class="flex-1 bg-transparent outline-none text-sm sm:text-base md:text-lg"
+            id="prompt-input"
+            class="flex-1 bg-transparent outline-none text-sm sm:text-base md:text-lg placeholder:text-black dark:placeholder:text-white"
           />
-          <button type="submit" class="material-symbols-outlined">
+          <button type="submit" id="attach" class="md:px-2 md:py-2">
             <img
               src="./assets/attach_file_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24 (1).svg"
               alt=""
@@ -115,12 +115,19 @@
               class="block dark:hidden"
             />
           </button>
+          <button id="send" class="hidden">
+            <img
+              src="./assets/arrow_upward_alt_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+              alt=""
+              class="bg-[#0161e9] hover:bg-[#1f72e7] px-2 py-2 md:px-2 md:py-2 rounded-full"
+            />
+          </button>
         </form>
 
         <!-- Action buttons -->
         <div class="flex gap-2">
           <button
-            class="bg-[#dbe6fb] dark:bg-[#263145] my-auto h-auto px-4 py-4 rounded-full"
+            class="bg-[#dbe6fb] hover:bg-[#dbdefb] dark:bg-[#263145] dark:hover:bg-[#304357] my-auto h-auto px-4 py-4 rounded-full"
             id="toggle-night"
           >
             <img
@@ -137,7 +144,7 @@
             />
           </button>
           <button
-            class="bg-[#dbe6fb] dark:bg-[#263145] my-auto h-auto px-4 py-4 rounded-full"
+            class="bg-[#dbe6fb] hover:bg-[#dbdefb] dark:bg-[#263145] dark:hover:bg-[#304357] my-auto h-auto px-4 py-4 rounded-full"
           >
             <img
               src="./assets/delete_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24 (1).svg"
@@ -159,10 +166,23 @@
   <script>
     const toggle = document.getElementById("toggle-night");
     const html = document.documentElement;
+    const input = document.getElementById("prompt-input");
+    const attach = document.getElementById("attach");
+    const send = document.getElementById("send");
 
     toggle.addEventListener("click", () => {
       html.classList.toggle("dark");
       console.log("added");
+    });
+
+    input.addEventListener("input", () => {
+      if (input.value.length > 0) {
+        attach.classList.add("hidden");
+        send.classList.remove("hidden"); // Show send button
+      } else {
+        send.classList.add("hidden");
+        attach.classList.remove("hidden"); // Show attach button
+      }
     });
   </script>
 </html>
