@@ -1,1 +1,11 @@
+/* src/input.css */
 @import "tailwindcss";
+
+/* v4-alpha dark-mode enable */
+@custom-variant dark (&:where(.dark, .dark *));
+/* optional smooth transition */
+*,
+*::before,
+*::after {
+  transition: background-color 0.1s ease, color 0.1s ease;
+}
