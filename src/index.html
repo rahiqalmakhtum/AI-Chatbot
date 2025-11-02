@@ -23,13 +23,33 @@
           transform: rotate(360deg);
         }
       }
+      .chat-container {
+        overflow-y: auto;
+        padding-bottom: 120px; /* space above input */
+        scroll-behavior: smooth;
+      }
+      .chat-container p {
+        white-space: pre-wrap;
+        line-height: 1.6;
+        word-break: break-word;
+        margin: 0;
+        color: inherit;
+      }
+      .chat-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .chat-container {
+        -ms-overflow-style: none; /* for IE and Edge */
+        scrollbar-width: none; /* for Firefox */
+      }
     </style>
   </head>
   <body
-    class="relative min-h-screen md:max-w-3xl lg:max-w-7xl mx-auto bg-[#f2f6ff] dark:bg-[#0e1724]"
+    class="relative min-h-screen md:min-h-[75vh] md:max-w-3xl lg:max-w-7xl mx-auto bg-[#f2f6ff] dark:bg-[#0e1724]"
   >
     <section
-      class="quick-start relative px-6 pb-18 py-12 md:pt-12 md:pb-20 lg:pb-8 lg:pt-20"
+      class="quick-start relative px-6 pb-[500px] py-12 md:pt-12 md:pb-20 lg:pb-8 lg:pt-20"
     >
       <div class="mb-8 md:mb-16 lg:mb-64">
         <div class="heading text-center sm:text-left">
@@ -100,16 +120,18 @@
       </div>
     </section>
     <section
-      class="relative px-6 pb-18 py-12 md:pt-12 md:pb-20 lg:pb-8 lg:pt-20"
+      class="relative px-6 pb-0 py-12 md:pt-12 md:pb-20 lg:pb-8 lg:pt-20"
     >
-      <div class="chat-container dark:text-white flex flex-col text-base">
+      <div
+        class="chat-container max-h-[calc(100vh-150px)] md:max-h-[calc(100vh-220px)] dark:text-white flex flex-col text-base"
+      >
         <!-- <div
-          class="self-end leading-relaxed bg-[#dbe6fb] dark:bg-[#263145] rounded-tr-lg rounded-tl-lg rounded-bl-lg rounded-br-sm p-4 mb-4 max-w-[75%]"
+          class="self-end leading-relaxed bg-[#dbe6fb] dark:bg-[#263145] rounded-tr-xl rounded-tl-xl rounded-bl-xl rounded-br-sm p-4 mb-4 max-w-[75%]"
         >
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam nihil
           veniam perspiciatis. Vel, tempore dolore.
         </div>
-        <div class="self-start rounded-lg p-4 mb-4 max-w-[75%]">
+        <div class="self-start rounded-lg p-4 mb-4 max-w-[85%]">
           <div class="flex gap-4">
             <img
               src="./assets/gemini.png"
@@ -117,9 +139,12 @@
               class="avatar h-12 w-12 bg-[#dbe6fb] dark:bg-[#263145] rounded-full p-1 -mt-1"
             />
             <p class="leading-relaxed align-top">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil vel
-              eligendi pariatur asperiores, modi suscipit? Lorem ipsum dolor sit
-              amet consectetur adipisicing elit. Quisquam, quod.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
+              labore. Dolores, hic. Commodi atque, alias vel laboriosam vitae
+              reiciendis necessitatibus odio impedit error sapiente? Vero illum
+              libero sint sunt doloremque. Minus laboriosam incidunt aliquid
+              necessitatibus ducimus. Facere, tenetur et? Debitis nulla aperiam
+              cumque unde animi vitae voluptates suscipit nemo illum. 
             </p>
           </div>
         </div> -->
@@ -127,7 +152,7 @@
     </section>
     <!-- Input Bar -->
     <div
-      class="fixed inset-x-0 bottom-0 md:bottom-10 z-50 bg-gradient-to-t from-[#f2f6ff] to-transparent dark:from-[#0e1724] dark:to-transparent pb-4 pt-6 md:pb-6"
+      class="fixed inset-x-0 bottom-0 md:bottom-6 z-50 bg-gradient-to-t from-[#f2f6ff] to-transparent dark:from-[#0e1724] dark:to-transparent pb-4 pt-6 md:pb-6"
     >
       <div class="mx-auto px-6 w-full max-w-3xl lg:max-w-7xl flex gap-2">
         <!-- Form -->
@@ -202,6 +227,9 @@
           </button>
         </div>
       </div>
+      <p class="text-center pt-4 hidden md:block md:text-base dark:text-white">
+        Gemini can make mistakes, so double-check it.
+      </p>
     </div>
   </body>
   <script src="./script.js"></script>

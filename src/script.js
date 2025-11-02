@@ -24,14 +24,14 @@ input.addEventListener("input", () => {
 const createUserMessage = (content) => {
   const wrapper = document.createElement("div");
   wrapper.className =
-    "self-end leading-relaxed bg-[#dbe6fb] dark:bg-[#263145] rounded-tr-lg rounded-tl-lg rounded-bl-lg rounded-br-sm p-4 mb-4 max-w-[75%]";
+    "self-end leading-relaxed bg-[#dbe6fb] dark:bg-[#263145] rounded-tr-xl rounded-tl-xl rounded-bl-xl rounded-br-sm p-4 mb-4 max-w-[75%]";
   wrapper.textContent = content;
   return wrapper;
 };
 
 const createBotMessage = (content) => {
   const wrapper = document.createElement("div");
-  wrapper.className = "self-start rounded-lg py-4 pr-4 mb-4 max-w-[75%]";
+  wrapper.className = "self-start rounded-lg py-4 pr-4 mb-4  max-w-[85%]";
 
   const innerDiv = document.createElement("div");
   innerDiv.className = "flex gap-4";
@@ -49,7 +49,14 @@ const createBotMessage = (content) => {
   innerDiv.appendChild(message);
   wrapper.appendChild(innerDiv);
 
-  return wrapper;
+  return { wrapper, message };
+};
+
+const typeText = async (element, text) => {
+  for (let i = 0; i <= text.length; i++) {
+    element.textContent = text.slice(0, i);
+    await new Promise((resolve) => setTimeout(resolve));
+  }
 };
 
 const handleSubmit = async (e) => {
@@ -62,23 +69,32 @@ const handleSubmit = async (e) => {
   send.classList.add("hidden");
   quickStart.classList.add("hidden");
 
+  // Append user message
   chatContainer.appendChild(createUserMessage(prompt));
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
-  const botPlaceholder = createBotMessage("Just a sec...");
-  chatContainer.appendChild(botPlaceholder);
+  // Create and append bot placeholder
+  const { wrapper, message } = createBotMessage("Just a sec...");
+  chatContainer.appendChild(wrapper);
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
-  const res = await fetch("http://localhost:3000/api/gemini", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ prompt }),
-  });
-  const data = await res.json();
+  try {
+    const res = await fetch("http://localhost:3000/api/gemini", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt }),
+    });
+    const data = await res.json();
 
-  const loadingImg = botPlaceholder.querySelector("img");
-  loadingImg.classList.remove("avatar"); // Remove rotating class
-  botPlaceholder.querySelector("p").textContent = data.text;
+    const loadingImg = wrapper.querySelector("img");
+    loadingImg.classList.remove("avatar");
+
+    message.textContent = "";
+    await typeText(message, data.text);
+  } catch (err) {
+    message.textContent = "Something went wrong.";
+  }
+
   chatContainer.scrollTop = chatContainer.scrollHeight;
 };
 
