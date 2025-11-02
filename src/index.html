@@ -15,7 +15,7 @@
     class="relative min-h-screen md:max-w-3xl lg:max-w-7xl mx-auto bg-[#f2f6ff] dark:bg-[#0e1724]"
   >
     <section
-      class="relative px-6 pb-18 py-12 md:pt-12 md:pb-20 lg:pb-8 lg:pt-20"
+      class="relative hidden px-6 pb-18 py-12 md:pt-12 md:pb-20 lg:pb-8 lg:pt-20"
     >
       <div class="mb-8 md:mb-16 lg:mb-64">
         <div class="heading text-center sm:text-left">
@@ -85,6 +85,32 @@
         </div>
       </div>
     </section>
+    <section
+      class="relative px-6 pb-18 py-12 md:pt-12 md:pb-20 lg:pb-8 lg:pt-20"
+    >
+      <div class="chat-container dark:text-white flex flex-col text-base">
+        <div
+          class="self-end leading-relaxed bg-[#dbe6fb] dark:bg-[#263145] rounded-tr-lg rounded-tl-lg rounded-bl-lg rounded-br-sm p-4 mb-4 max-w-[75%]"
+        >
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam nihil
+          veniam perspiciatis. Vel, tempore dolore.
+        </div>
+        <div class="self-start rounded-lg p-4 mb-4 max-w-[75%]">
+          <div class="flex gap-4">
+            <img
+              src="./assets/gemini.png"
+              alt=""
+              class="h-12 w-12 bg-[#dbe6fb] dark:bg-[#263145] rounded-full p-1 -mt-1"
+            />
+            <p class="leading-relaxed align-top">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil vel
+              eligendi pariatur asperiores, modi suscipit? Lorem ipsum dolor sit
+              amet consectetur adipisicing elit. Quisquam, quod.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
     <!-- Input Bar -->
     <div
       class="fixed inset-x-0 bottom-0 md:bottom-10 z-50 bg-gradient-to-t from-[#f2f6ff] to-transparent dark:from-[#0e1724] dark:to-transparent pb-4 pt-6 md:pb-6"
@@ -93,7 +119,7 @@
         <!-- Form -->
         <form
           action="#"
-          class="flex flex-1 justify-between pl-4 pr-2 sm:pl-4 py-0 sm:py-2 rounded-full bg-[#dbe6fb] dark:bg-[#263145] dark:text-white"
+          class="prompt-form flex flex-1 justify-between pl-4 pr-2 sm:pl-4 py-0 sm:py-2 rounded-full bg-[#dbe6fb] dark:bg-[#263145] dark:text-white"
         >
           <input
             type="text"
@@ -163,26 +189,5 @@
       </div>
     </div>
   </body>
-  <script>
-    const toggle = document.getElementById("toggle-night");
-    const html = document.documentElement;
-    const input = document.getElementById("prompt-input");
-    const attach = document.getElementById("attach");
-    const send = document.getElementById("send");
-
-    toggle.addEventListener("click", () => {
-      html.classList.toggle("dark");
-      console.log("added");
-    });
-
-    input.addEventListener("input", () => {
-      if (input.value.length > 0) {
-        attach.classList.add("hidden");
-        send.classList.remove("hidden"); // Show send button
-      } else {
-        send.classList.add("hidden");
-        attach.classList.remove("hidden"); // Show attach button
-      }
-    });
-  </script>
+  <script src="./script.js"></script>
 </html>
