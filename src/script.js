@@ -79,14 +79,11 @@ const handleSubmit = async (e) => {
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
   try {
-    const res = await fetch(
-      "https://ai-chatbot-mu-pied-76.vercel.app/api/gemini",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
-      }
-    );
+    const res = await fetch("/api/gemini", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt }),
+    });
     const data = await res.json();
 
     const loadingImg = wrapper.querySelector("img");

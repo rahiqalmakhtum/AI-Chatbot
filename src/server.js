@@ -23,5 +23,3 @@ app.post("/api/gemini", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-app.listen(3000, () => console.log("Server running on http://localhost:3000"));
